@@ -1,1 +1,9 @@
-#
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.gz
+
+plan-zadan.pdf
+zasady.pdf
