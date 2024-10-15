@@ -6,6 +6,8 @@
 \usepackage{tabularx, multirow, hyperref, enumitem}
 \usepackage{listings, xcolor}
 \usepackage{amsmath, amssymb}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 %\usepackage{minted}
 
 \hypersetup{
@@ -83,4 +85,135 @@
         \item System operacyjny: Microsoft Windows 11,
         \item Architektura systemu: x64.
     \end{itemize}
+
+    \section{Działanie algorytmów}
+    \subsection{Wykorzystane biblioteki}
+    W realizacji rozwiązania wykorzystane zostały następujące
+    biblioteki:
+    \begin{lstlisting}
+    import numpy as np
+    import matplotlib.pyplot as plt
+    import time
+    \end{lstlisting}
+    \subsection{Pseudokod}
+    \begin{algorithm}[H]
+        \caption{Algorytm Binét'a}
+        \begin{algorithmic}
+            \State \textbf{Input:} A, B
+            \State \textbf{Output:} C
+            \Function{binet}{A, B}
+                \State n = size(A)
+                \If{n = 1}
+                    \State return A * B
+                \EndIf
+                \State
+                \State mid = n \textbf{div} 2
+                \State A11 = A[1:n, 1:n]       // Górny lewy blok
+                \State A12 = A[1:n, n+1:2n]    // Górny prawy blok
+                \State A21 = A[n+1:2n, 1:n]    // Dolny lewy blok
+                \State A22 = A[n+1:2n, n+1:2n] // Dolny prawy blok
+                \State B11 = B[1:n, 1:n]
+                \State B12 = B[1:n, n+1:2n]
+                \State B21 = B[n+1:2n, 1:n]
+                \State B22 = B[n+1:2n, n+1:2n]
+                \State
+                \State C11 = BINET(A11, B11) + BINET(A12, B21)
+                \State C12 = BINET(A11, B12) + BINET(A12, B22)
+                \State C21 = BINET(A21, B11) + BINET(A22, B21)
+                \State C22 = BINET(A21, B12) + BINET(A22, B22)
+                \State
+                \State C[1:n/2, 1:n/2] = C1      // Górny lewy blok
+                \State C[1:n/2, n/2+1:n] = C2    // Górny prawy blok
+                \State C[n/2+1:n, 1:n/2] = C3    // Dolny lewy blok
+                \State C[n/2+1:n, n/2+1:n] = C4  // Dolny prawy blok
+                \State \Return C
+            \EndFunction
+        \end{algorithmic}
+    \end{algorithm}
+
+    \begin{algorithm}[H]
+        \caption{Algorytm Strassen'a}
+        \begin{algorithmic}
+            \State \textbf{Input:} A, B
+            \State \textbf{Output:} C
+            \Function{strassen}{A, B}
+                \State n = size(A)
+                \If{n = 1}
+                    \State return A * B
+                \EndIf
+                \State
+                \State mid = n \textbf{div} 2
+                \State A11 = A[1:n, 1:n]       // Górny lewy blok
+                \State A12 = A[1:n, n+1:2n]    // Górny prawy blok
+                \State A21 = A[n+1:2n, 1:n]    // Dolny lewy blok
+                \State A22 = A[n+1:2n, n+1:2n] // Dolny prawy blok
+                \State B11 = B[1:n, 1:n]
+                \State B12 = B[1:n, n+1:2n]
+                \State B21 = B[n+1:2n, 1:n]
+                \State B22 = B[n+1:2n, n+1:2n]
+                \State
+                \State P1 = STRASSEN(A11 + A22, B11 + B22)
+                \State P2 = STRASSEN(A21 + A22, B11)
+                \State P3 = STRASSEN(A11, B12 - B22)
+                \State P4 = STRASSEN(A22, B21 - B11)
+                \State P5 = STRASSEN(A11 + A12, B22)
+                \State P6 = STRASSEN(A21 - A11, B11 + B12)
+                \State P7 = STRASSEN(A12 - A22, B21 + B22)
+                \State
+                \State C11 = P1 + P4 - P5 + P7
+                \State C12 = P3 + P5
+                \State C21 = P2 + P4
+                \State C22 = P1 + P3 - P2 + P6
+                \State
+                \State C[1:n/2, 1:n/2] = C1      // Górny lewy blok
+                \State C[1:n/2, n/2+1:n] = C2    // Górny prawy blok
+                \State C[n/2+1:n, 1:n/2] = C3    // Dolny lewy blok
+                \State C[n/2+1:n, n/2+1:n] = C4  // Dolny prawy blok
+                \State \Return C
+            \EndFunction
+        \end{algorithmic}
+    \end{algorithm}
+
+    \section{Porównanie działania algorytmów}
+    \subsection{Czas działania}
+    Czas działania algorytmów dla $n=2^m$, gdzie
+    \[
+        m \in \{2,4,8,16,32,64\}
+    \]
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.9\linewidth]{czas_dzialania1.png}
+        \caption{Porównanie czasu działania.}
+    \end{figure}
+    Czas działania algorytmów dla $n=2^m$, gdzie
+    \[
+        m \in [2, 64]
+    \]
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.9\linewidth]{czas_dzialania2.png}
+        \caption{Porównanie czasu działania.}
+    \end{figure}
+
+    \subsection{Liczba operacji zmienno-przecinkowych}
+    Liczba operacji zmienno-przecinkowych wykonanych podczas
+    działania algorytmów dla $n=2^m$, gdzie
+    \[
+        m \in \{2,4,8,16,32,64\}
+    \]
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.9\linewidth]{liczba_operacji1.png}
+        \caption{Porównanie liczby operacji zmienno-przecinkowych.}
+    \end{figure}
+    Liczba operacji zmienno-przecinkowych wykonanych podczas
+    działania algorytmów dla $n=2^m$, gdzie
+    \[
+        m \in [2, 64]
+    \]
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.9\linewidth]{liczba_operacji2.png}
+        \caption{Porównanie liczby operacji zmienno-przecinkowych.}
+    \end{figure}
 \end{document}
