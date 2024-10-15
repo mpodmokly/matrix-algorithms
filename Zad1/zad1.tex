@@ -216,4 +216,60 @@
         \includegraphics[width=0.9\linewidth]{liczba_operacji2.png}
         \caption{Porównanie liczby operacji zmienno-przecinkowych.}
     \end{figure}
+
+    \section{Oszacowanie złożoności obliczeniowej}
+    Dla każdego algorytmu zmierzony został czas obliczeń dla
+    następujących wielkości macierzy:
+    \[
+        n \in \{2,4,8,16,32,64,128\}
+    \]
+    oraz dopasowana krzywa złożoności obliczeniowej.
+    
+    \subsection{Algorytm Binét'a}
+    Dopasowana krzywa:
+    \[
+        y=2*10^{-6}*x^3
+    \]
+    Zatem złożoność wynosi
+    \[
+        O(n) \approx n^3
+    \]
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\linewidth]{zlozonosc_binet.png}
+        \caption{Krzywa dopasowana w skali logarytmicznej dla
+            algorytmu Binét'a.}
+    \end{figure}
+
+    \subsection{Algorytm Strassena}
+    Dopasowana krzywa:
+    \[
+        y=2*10^{-5}*x^{2.5}
+    \]
+    Zatem złożoność wynosi
+    \[
+        O(n) \approx n^{2.5}
+    \]
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\linewidth]{zlozonosc_strassen.png}
+        \caption{Krzywa dopasowana w skali logarytmicznej dla
+            algorytmu Strassena.}
+    \end{figure}
+
+    \subsection{Algorytm AI}
+    Dopasowana krzywa:
+    \[
+        y=1.8*10^{-5}*x^3
+    \]
+    Zatem złożoność wynosi
+    \[
+        O(n) \approx n^3
+    \]
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\linewidth]{zlozonosc_strassen.png}
+        \caption{Krzywa dopasowana w skali logarytmicznej dla
+            algorytmu AI.}
+    \end{figure}
 \end{document}
