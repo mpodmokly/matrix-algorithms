@@ -1,1 +1,2 @@
-# matrix-algorithms
+# Matrix Algorithms
+## Projects content

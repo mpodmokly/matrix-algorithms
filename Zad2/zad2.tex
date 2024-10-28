@@ -96,5 +96,152 @@
     import time
     \end{lstlisting}
     \subsection{Pseudokod}
+    \begin{algorithm}[H]
+        \caption{Rekurencyjne odwracanie macierzy}
+        \begin{algorithmic}
+            \State \textbf{Input:} A
+            \State \textbf{Output:} A\_inv
+            \Function{recursive\_inverse}{A}
+                \State n = size(A)
+                \If{n = 1}
+                    \State \Return 1 / A[0, 0]
+                \EndIf
+                \State
+                \State A11 = A[1:n/2, 1:n/2]      // Górny lewy blok
+                \State A12 = A[1:n/2, n/2+1:n]    // Górny prawy blok
+                \State A21 = A[n/2+1:n, 1:n/2]    // Dolny lewy blok
+                \State A22 = A[n/2+1:n, n/2+1:n]  // Dolny prawy blok
+                \State
+                \State A11\_inv = recursive\_inverse(A11)
+                \State S = A22 - A21 * A11\_inv * A12
+                \State S\_inv = recursive\_inverse(S)
+                \State
+                \State B11 = A11\_inv + A11\_inv * A12 * S\_inv * A21 * A11\_inv
+                \State B12 = -A11\_inv * A12 * S\_inv
+                \State B21 = -S\_inv * A21 * A11\_inv
+                \State B22 = S\_inv
+                \State
+                \State A\_inv[1:n/2, 1:n/2] = B1
+                \State A\_inv[1:n/2, n/2+1:n] = B2
+                \State A\_inv[n/2+1:n, 1:n/2] = B3
+                \State A\_inv[n/2+1:n, n/2+1:n] = B4
+                \State \Return A\_inv
+            \EndFunction
+        \end{algorithmic}
+    \end{algorithm}
+
+    \begin{algorithm}[H]
+        \caption{Rekurencyjna LU faktoryzacja}
+        \begin{algorithmic}
+            \State \textbf{Input:} A
+            \State \textbf{Output:} L, U
+            \Function{lu\_recursive}{A}
+                \State n = size(A)
+                \If{n = 1}
+                    \State \Return 1, A[0, 0]
+                \EndIf
+                \State
+                \State A11 = A[1:n/2, 1:n/2]      // Lewy górny blok
+                \State A12 = A[1:n/2, n/2+1:n]    // Prawy górny blok
+                \State A21 = A[n/2+1:n, 1:n/2]    // Lewy dolny blok
+                \State A22 = A[n/2+1:n, n/2+1:n]  // Prawy dolny blok
+                \State
+                \State L11, U11 = lu\_recursive(A11)
+                \State U11\_inv = recursive\_inverse(U11)
+                \State L11\_inv = recursive\_inverse(L11)
+                \State
+                \State L21 = A21 * U11\_inv
+                \State U12 = L11\_inv * A12
+                \State S = A22 - L21 * U12
+                \State Ls, Us = lu\_recursive(S)
+                \State
+                \State L[1:n/2, 1:n/2] = L11     // Lewy górny blok
+                \State L[1:n/2, n/2+1:n] = 0     // Prawy górny blok
+                \State L[n/2+1:n, 1:n/2] = L21   // Lewy dolny blok
+                \State L[n/2+1:n, n/2+1:n] = Ls  // Prawy dolny blok
+                \State
+                \State U[1:n/2, 1:n/2] = U11
+                \State U[1:n/2, n/2+1:n] = U12
+                \State U[n/2+1:n, 1:n/2] = 0
+                \State U[n/2+1:n, n/2+1:n] = Us
+                \State \Return L, U
+            \EndFunction
+        \end{algorithmic}
+    \end{algorithm}
+
+    \begin{algorithm}[H]
+        \caption{Rekurencyjne obliczanie wyznacznika macierzy}
+        \begin{algorithmic}
+            \State \textbf{Input:} A
+            \State \textbf{Output:} det
+            \Function{recursive\_determinant}{A}
+                \State L, U = lu\_recursive(A)
+                \State n = size(L)
+                \State m = size(U)
+                \State diagL = array(n)
+                \State diagU = array(m)
+                \State
+                \For{i \textbf{from} 0 \textbf{to} n - 1}
+                    \State diagL[i] = L[i, i]
+                \EndFor
+                \For{i \textbf{from} 0 \textbf{to} m - 1}
+                    \State diagU[i] = U[i, i]
+                \EndFor
+                \State
+                \State det = 1
+                \For{i \textbf{from} 0 \textbf{to} n - 1}
+                    \State det = det * diagL[i]
+                \EndFor
+                \For{i \textbf{from} 0 \textbf{to} m - 1}
+                    \State det = det * diagU[i]
+                \EndFor
+                \State \Return det
+            \EndFunction
+        \end{algorithmic}
+    \end{algorithm}
+
+    \begin{algorithm}[H]
+        \caption{Rekurencyjna eliminacja Gaussa}
+        \begin{algorithmic}
+            \State \textbf{Input:} A, b
+            \State \textbf{Output:} x
+            \Function{recursive\_gaussian\_elimination}{A, b}
+                \State n = size(A)
+                \If{n = 1}
+                    \State return b[0] / A[0, 0]
+                \EndIf
+                \State
+                \State A11 = A[1:n/2, 1:n/2]      // Lewy górny blok
+                \State A12 = A[1:n/2, n/2+1:n]    // Prawy górny blok
+                \State A21 = A[n/2+1:n, 1:n/2]    // Lewy dolny blok
+                \State A22 = A[n/2+1:n, n/2+1:n]  // Prawy dolny blok
+                \State b1 = b[1:n/2]
+                \State b2 = b[n/2+1:n]
+                \State
+                \State L11, U11 = lu\_recursive(A11)
+                \State L11\_inv = recursive\_inverse(L11)
+                \State U11\_inv = recursive\_inverse(U11)
+                \State S = A22 - A21 * U11\_inv * L11\_inv * A12
+                \State Ls, Us = lu\_recursive(S)
+                \State Ls\_inv = recursiv\_inverse(Ls)
+                \State Us\_inv = recursive\_inverse(Us)
+                \State
+                \State RHS1 = L1\_inv * b1
+                \State RHS2 = Ls\_inv * b2 -
+                    Ls\_inv * A21 * U11\_inv * RHS1
+                \State x2 = Us\_inv * RHS2
+                \State x1 = U11\_inv * RHS1 -
+                    U11\_inv * L11\_inv * A12 * x2
+                    \State
+                \State x[1:size(x1)] = x1     // Lewa połowa
+                \State x[size(x1) + 1:size(x1) + size(x2)] =
+                    x2                        // Prawa połowa
+                \State \Return x
+            \EndFunction
+        \end{algorithmic}
+    \end{algorithm}
+
+    \section{Porównanie działania algorytmów}
+    \subsection{Czas działania}
     
 \end{document}
