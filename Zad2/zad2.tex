@@ -245,14 +245,14 @@
     \subsection{Czas działania}
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.8\linewidth]{zad2_time.png}
+        \includegraphics[width=0.8\linewidth]{zad2_time2.png}
         \caption{Porównanie czasu działania każdego algorytmu.}
     \end{figure}
 
     \subsection{Liczba operacji zmienno-przecinkowych}
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.8\linewidth]{zad2_flops.png}
+        \includegraphics[width=0.8\linewidth]{zad2_flops2.png}
         \caption{Porównanie liczby operacji zmienno-przecinkowych
             każdego algorytmu.}
     \end{figure}
@@ -345,11 +345,90 @@
     \end{figure}
 
     \subsection{Podsumowanie}
-    Oszacowane złożoności obliczeniowe prezentowanych algorytmów
+    Oszacowane złożoności obliczeniowej prezentowanych algorytmów
     odbiegają od złożoności teoretycznych. Może być to spowodowane
-    niewystarczająco stabilną platformą testową lub szeregiem
-    usprawnień oferowanych przez biblioteki Pythona.
+    niewystarczająco stabilną platformą testową, zbyt młym rozmiarem
+    danych wejściowych lub szeregiem usprawnień oferowanych przez
+    biblioteki Pythona.
 
     \section{Porównanie obliczeń z biblioteką NumPy}
+    Na wejściu mamy macierz $A$ i wektor $b$ z następującymi
+    wartościami:
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\linewidth]{porownanie_wejscie2.png}
+        \caption{Wartości macierzy $A$ i wektora $b$.}
+    \end{figure}
+
+    \subsection{Rekurencyjne odwracanie macierzy}
+    Wynik zaimplementowanego algorytmu:
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\linewidth]{por_inv_alg.png}
+        \caption{Wynik algorytmu.}
+    \end{figure}
+    \subsection*{}
+    Wynik uzyskany za pomocą biblioteki \texttt{NumPy}:
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\linewidth]{por_inv_np.png}
+        \caption{Wynik \texttt{NumPy}.}
+    \end{figure}
+
+    \subsection{Rekurencyjna LU faktoryzacja}
+    Wynik zaimplementowanego algorytmu:
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\linewidth]{por_lu_alg.png}
+        \caption{Wynik algorytmu.}
+    \end{figure}
+    \subsection*{}
+    Wbudowane biblioteki Pythona przy dekompozycji LU korzystają
+    z zamiany wierszy przez co wyniki mogą się różnić. Dlatego
+    w celu weryfikacji poprawności algorytmu pomnożymy macierze
+    $L$ i $U$, co w wyniku powinno dać macierz wejściową $A$.
+    Wynik uzyskany z pomnożenia macierzy $L$ i $U$:
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\linewidth]{por_lu_np.png}
+        \caption{Wynik mnożenia.}
+    \end{figure}
+
+    \subsection{Rekurencyjne liczenie wyznacznika}
+    Wynik zaimplementowanego algorytmu:
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.4\linewidth]{por_det_alg.png}
+        \caption{Wynik algorytmu.}
+    \end{figure}
+    \subsection*{}
+    Wynik uzyskany za pomocą biblioteki \texttt{NumPy}:
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.4\linewidth]{por_det_np.png}
+        \caption{Wynik \texttt{NumPy}.}
+    \end{figure}
+
+    \subsection{Rekurencyjna eliminacja Gaussa}
+    Wynik zaimplementowanego algorytmu:
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\linewidth]{por_gauss_alg.png}
+        \caption{Wynik algorytmu.}
+    \end{figure}
+    \subsection*{}
+    Wynik uzyskany za pomocą biblioteki \texttt{NumPy}:
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\linewidth]{por_gauss_np.png}
+        \caption{Wynik \texttt{NumPy}.}
+    \end{figure}
+
+    \subsection{Podsumowanie}
+    Wyniki uzyskane za pomocją zaimplementowanych algorytmów są
+    prawie identyczne z wynikami uzyskanymi za pomocą biblioteki
+    \texttt{NumPy} w Pythonie z dokładnością do bardzo błędu
+    numerycznego. Można wnioskować, że przedstawione algorytmy
+    działają poprawnie.
     
 \end{document}

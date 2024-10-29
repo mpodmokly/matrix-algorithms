@@ -3,3 +3,7 @@
 * Binét algorithm
 * Strassen algorithm
 * Matrix multiplication using AI algorithm
+* Recursive matrix inversion
+* Recursive LU factorization
+* Recursive determinant
+* Recursive Gaussian elimination
