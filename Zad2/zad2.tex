@@ -234,8 +234,8 @@
                     U11\_inv * L11\_inv * A12 * x2
                     \State
                 \State x[1:size(x1)] = x1     // Lewa połowa
-                \State x[size(x1) + 1:size(x1) + size(x2)] =
-                    x2                        // Prawa połowa
+                \State x[size(x1) + 1:size(x1) + size(x2)] = x2
+                                              // Prawa połowa
                 \State \Return x
             \EndFunction
         \end{algorithmic}
@@ -243,5 +243,113 @@
 
     \section{Porównanie działania algorytmów}
     \subsection{Czas działania}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\linewidth]{zad2_time.png}
+        \caption{Porównanie czasu działania każdego algorytmu.}
+    \end{figure}
+
+    \subsection{Liczba operacji zmienno-przecinkowych}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\linewidth]{zad2_flops.png}
+        \caption{Porównanie liczby operacji zmienno-przecinkowych
+            każdego algorytmu.}
+    \end{figure}
+
+    \section{Oszacowanie złożoności obliczeniowej}
+    W przypadku każdego algorytmu zmierzony został czas obliczeń dla
+    \[
+        n \in [8,100]
+    \]
+    dla $40$ równoodległych od siebie wartości oraz dopasowana krzywa
+    złożoności obliczeniowej metodą \texttt{curve\_fit} z pakietu
+    \texttt{scipy.optimize}.
+
+    \subsection{Rekurencyjne odwracanie macierzy}
+    Dopasowana krzywa:
+    \[
+        y=3.7 \cdot 10^{-4} \cdot x^{2.12}
+    \]
+    Zatem oszacowana złożoność obliczeniowa wynosi:
+    \[
+        O(n)=n^{2.12}
+    \]
+    a teoretyczna złożoność:
+    \[
+        O(n)=n^{2.81}
+    \]
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\linewidth]{zlozonosc_rek_mnozenie.png}
+        \caption{Krzywa złożoności dla rekurencyjnego odwracania macierzy.}
+    \end{figure}
+
+    \subsection{Rekurencyjna LU faktoryzacja}
+    Dopasowana krzywa:
+    \[
+        y=3 \cdot 10^{-4} \cdot x^{2.04}
+    \]
+    Zatem oszacowana złożoność obliczeniowa wynosi:
+    \[
+        O(n)=n^{2.04}
+    \]
+    a teoretyczna złożoność:
+    \[
+        O(n)=n^3
+    \]
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\linewidth]{zlozonosc_lu.png}
+        \caption{Krzywa złożoności dla rekurencyjnej LU faktoryzacji.}
+    \end{figure}
+
+    \subsection{Rekurencyjne liczenie wyznacznika}
+    Dopasowana krzywa:
+    \[
+        y=3.1 \cdot 10^{-4} \cdot x^{2.02}
+    \]
+    Zatem oszacowana złożoność obliczeniowa wynosi:
+    \[
+        O(n)=n^{2.02}
+    \]
+    a teoretyczna złożoność:
+    \[
+        O(n)=n^3
+    \]
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\linewidth]{zlozonosc_det.png}
+        \caption{Krzywa złożoności dla rekurencyjnego liczenia
+            wyznacznika macierzy.}
+    \end{figure}
+
+    \subsection{Rekurencyjna eliminacja Gaussa}
+    Dopasowana krzywa:
+    \[
+        y=3.9 \cdot 10^{-4} \cdot x^{2.03}
+    \]
+    Zatem oszacowana złożoność obliczeniowa wynosi:
+    \[
+        O(n)=n^{2.03}
+    \]
+    a teoretyczna złożoność:
+    \[
+        O(n)=n^3
+    \]
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\linewidth]{zlozonosc_gauss.png}
+        \caption{Krzywa złożoności dla rekurencyjnej eliminacji
+            Gaussa.}
+    \end{figure}
+
+    \subsection{Podsumowanie}
+    Oszacowane złożoności obliczeniowe prezentowanych algorytmów
+    odbiegają od złożoności teoretycznych. Może być to spowodowane
+    niewystarczająco stabilną platformą testową lub szeregiem
+    usprawnień oferowanych przez biblioteki Pythona.
+
+    \section{Porównanie obliczeń z biblioteką NumPy}
     
 \end{document}
