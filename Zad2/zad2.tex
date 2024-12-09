@@ -49,8 +49,7 @@
     numbersep=-10pt,
     morekeywords={as},
     classoffset=1,
-    morekeywords={quad, quad_vec, trapz, simps, linregress,
-        newton},
+    morekeywords={curve_fit},
     keywordstyle=\color{md-yellow},
     classoffset=0
 }
@@ -94,6 +93,7 @@
     import numpy as np
     import matplotlib.pyplot as plt
     import time
+    from scipy.optimize import curve_fit
     \end{lstlisting}
     \subsection{Pseudokod}
     \begin{algorithm}[H]
