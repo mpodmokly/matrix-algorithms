@@ -10,6 +10,14 @@
 \usepackage{algpseudocode}
 %\usepackage{minted}
 
+\definecolor{md-black}{rgb}{0.12, 0.12, 0.12}
+\definecolor{md-teal}{rgb}{0.38, 0.79, 0.69}
+\definecolor{md-mauve}{rgb}{0.76, 0.52, 0.75}
+\definecolor{md-yellow}{rgb}{0.86, 0.86, 0.67}
+\definecolor{md-green}{rgb}{0.13, 0.55, 0.13}
+\definecolor{md-red}{rgb}{0.82, 0.10, 0.14}
+\definecolor{md-gray}{rgb}{0.44, 0.46, 0.51}
+
 \hypersetup{
     colorlinks=true,
     linkcolor=black,
@@ -17,15 +25,6 @@
     citecolor=black
 }
 
-\definecolor{md-black}{rgb}{0.12, 0.12, 0.12}
-\definecolor{md-teal}{rgb}{0.38, 0.79, 0.69}
-\definecolor{md-mauve}{rgb}{0.76, 0.52, 0.75}
-\definecolor{md-yellow}{rgb}{0.86, 0.86, 0.67}
-\definecolor{md-green}{rgb}{0.13, 0.55, 0.13}
-\definecolor{md-red}{rgb}{0.82, 0.10, 0.14}
-\definecolor{md-purple}{rgb}{0.69, 0.33, 0.73}
-\definecolor{md-orange}{rgb}{0.96, 0.42, 0.18}
-\definecolor{md-gray}{rgb}{0.44, 0.46, 0.51}
 \lstset{
     language=Python,
     basicstyle=\color{md-teal}\ttfamily,
@@ -94,7 +93,26 @@
     import matplotlib.patches as patches
     \end{lstlisting}
 
-    \subsection{Pseudokod}
-    
+    \subsection{Kod funkcji}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\linewidth]{Node.png}
+        \caption{Struktura drzewa macierzy.}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\linewidth]{truncated_SVD.png}
+        \caption{Częściowe SVD.}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\linewidth]{compress_matrix.png}
+        \caption{Kompresja macierzy.}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\linewidth]{create_tree.png}
+        \caption{Tworzenie drzewa kompresji.}
+    \end{figure}
 
 \end{document}
