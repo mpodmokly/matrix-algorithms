@@ -7,3 +7,4 @@
 * Recursive LU factorization
 * Recursive determinant
 * Recursive Gaussian elimination
+* Hierarchical matrix compression
