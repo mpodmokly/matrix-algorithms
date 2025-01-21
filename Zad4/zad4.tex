@@ -134,6 +134,56 @@
         \caption{Dodawanie część 2.}
     \end{figure}
 
-    \section{Wyniki algorytmów}
+    \section{Czas działania}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\linewidth]{matrix_vector_time.png}
+        \caption{Wykres czasu działania.}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\linewidth]{matrix_matrix_time.png}
+        \caption{Wykres czasu działania.}
+    \end{figure}
+
+    \section{Oszacowanie złożoności obliczeniowej}
+    Do wyników pomiarów, za pomocą funkcji \texttt{curve\_fit}
+    z biblioteki \texttt{scipy.optimize}, dopasowana została krzywa
+    o równaniu
+    \[
+        y=\alpha N^\beta
+    \]
+
+    \subsection{Mnożenie macierzy i wektora}
+    Dopasowana krzywa:
+    \[
+        y=1,41 \cdot 10^{-5} \cdot N^{2,06}
+    \]
+    Zatem oszacowana złożoność obliczeniowa wynosi:
+    \[
+        O(n)=n^{2,06}
+    \]
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\linewidth]{matrix_vector_comp.png}
+        \caption{Krzywa na wykresie.}
+    \end{figure}
+
+    \subsection{Mnożenie dwóch macierzy}
+    Dopasowana krzywa:
+    \[
+        y=6,4 \cdot 10^{-8} \cdot N^{2,75}
+    \]
+    Zatem oszacowana złożoność obliczeniowa wynosi:
+    \[
+        O(n)=n^{2,75}
+    \]
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\linewidth]{matrix_matrix_comp.png}
+        \caption{Krzywa na wykresie.}
+    \end{figure}
+
+    \section{}
 
 \end{document}
