@@ -184,6 +184,20 @@
         \caption{Krzywa na wykresie.}
     \end{figure}
 
-    \section{}
+    \section{Wyznaczenie dokładności}
+    Wygenerowana została macierz $A$ i wektor $x$, a następnie
+    zostały użyte we wzorze na dokładność operacji
+    \[
+        ||Ax-Hx||^2=\sum_{i}(Ax_i-Hx_i)^2
+    \]
+    dla mnożenia macierzy z wektorem oraz
+    \[
+        ||A^2-H^2||^2=\sum_{i,j}(A_{i,j}^2-H_{i,j}^2)^2
+    \]
+    dla mnożenia dwóch macierzy. Otrzymane wyniki:
+    \begin{align*}
+        &||Ax-Hx||^2 \approx 2100 \\
+        &||A^2-H^2||^2 \approx 111309
+    \end{align*}
 
 \end{document}
