@@ -8,3 +8,4 @@
 * Recursive determinant
 * Recursive Gaussian elimination
 * Hierarchical matrix compression
+* Hierarchical matrix multiplication
